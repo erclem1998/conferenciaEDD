@@ -1,0 +1,16 @@
+{
+    "carnet": 202012345,
+    "hizq": {
+        "carnet": 201967890,
+        "hizq": null,
+        "hder": null,
+        "listaCursos": []
+    },
+    "hder": {
+        "carnet": 202116791,
+        "hizq": null,
+        "hder": null,
+        "listaCursos": []
+    },
+    "listaCursos": []
+}

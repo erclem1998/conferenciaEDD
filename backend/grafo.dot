@@ -1,0 +1,8 @@
+digraph G{
+node[shape="box"]
+Nodo0[label="202016791"];
+Nodo1[label="201916791"];
+Nodo0->Nodo1;
+Nodo2[label="202116791"];
+Nodo0->Nodo2;
+}
