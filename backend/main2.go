@@ -189,8 +189,6 @@ func main() {
 	router.HandleFunc("/arbol", getArbol).Methods("GET")
 	router.HandleFunc("/crearNodo", createNode).Methods("POST")
 	router.HandleFunc("/arbolBinario", getImagenArbol).Methods("GET")
-	/*router.HandleFunc("/tasks/{id}", deleteTask).Methods("DELETE")
-	router.HandleFunc("/tasks/{id}", updateTask).Methods("PUT")*/
 
 	log.Fatal(http.ListenAndServe(":3000", router))
 }
