@@ -169,19 +169,21 @@ func createDot(nodo* Nodo) string{
 	//fmt.Println(grafo)
 }
 
-func cargarDatos(){
+func cargarDatos() *Nodo{
+	var arbol *Nodo
 	datosArchivo, err := ioutil.ReadFile("./persiste.json")
     if err != nil {
         log.Fatal(err)
     }
-	err=json.Unmarshal(datosArchivo, &raiz)
+	err=json.Unmarshal(datosArchivo, &arbol)
 	if err != nil {
         log.Fatal(err)
     }
+	return arbol
 }
 
 func main() {
-	cargarDatos()
+	raiz=cargarDatos()
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/", indexRoute)
 	router.HandleFunc("/arbol", getArbol).Methods("GET")
