@@ -57,7 +57,7 @@ func getArbol(w http.ResponseWriter, r *http.Request) {
 //GET obtiene la lista de carnets en orden
 func getListaCarnetsInorden(w http.ResponseWriter, r *http.Request) {
 	var lista_carnets[] int
-	lista_carnets=inorden(raiz,lista_carnets)
+	lista_carnets=listaInorden(raiz,lista_carnets)
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(&listaCarnet{ListaCarnets:lista_carnets})
 }
@@ -150,14 +150,45 @@ func insertarNodo(nodo* Nodo, nodoInsertar *Nodo) *Nodo{
 	return nodo 
 }
 
-//Recorrido en inorden
-func inorden(nodo* Nodo, lista[] int) []int {
+//POST obtiene los cursos de un estudiante
+func getListaCursos(w http.ResponseWriter, r *http.Request){
+	var cursos[] NodoLista
+	var newNode* Nodo
+	//leemos el body de la petición
+	reqBody, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		fmt.Fprintf(w, "Datos Inválidos")
+	}
+	//tomamos los valores del body y los colocamos en una variable de struct de Nodo
+	json.Unmarshal(reqBody, &newNode)
+	cursos = listaCursosEstudiante(raiz, newNode.Carnet)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+	json.NewEncoder(w).Encode(&cursos)
+}
+
+func listaCursosEstudiante(nodo* Nodo, carnet int) []NodoLista{
+	var lista[] NodoLista
+	if nodo.Carnet==carnet{
+		return nodo.ListaCursos
+	}
 	if nodo.Hizq != nil{
-		lista=inorden(nodo.Hizq, lista)
+		lista=listaCursosEstudiante(nodo.Hizq, carnet)
+	}
+	if nodo.Hder != nil{
+		lista=listaCursosEstudiante(nodo.Hder, carnet)
+	}
+	return lista
+}
+
+//Recorrido en inorden
+func listaInorden(nodo* Nodo, lista[] int) []int {
+	if nodo.Hizq != nil{
+		lista=listaInorden(nodo.Hizq, lista)
 	}
 	lista = append(lista, nodo.Carnet)
 	if nodo.Hder != nil{
-		lista=inorden(nodo.Hder, lista)
+		lista=listaInorden(nodo.Hder, lista)
 	}
 	return lista
 }
@@ -254,6 +285,7 @@ func main() {
 	router.HandleFunc("/crearNodo", createNode).Methods("POST")
 	router.HandleFunc("/arbolBinario", getImagenArbol).Methods("GET")
 	router.HandleFunc("/listaEstudiantes", getListaCarnetsInorden).Methods("GET")
+	router.HandleFunc("/cursosEstudiante", getListaCursos).Methods("POST")
 	//Se agregaron cors
 	log.Fatal(http.ListenAndServe(":3000", handlers.CORS(handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"}), handlers.AllowedMethods([]string{"GET", "POST", "PUT", "HEAD", "OPTIONS"}), handlers.AllowedOrigins([]string{"*"}))(router)))
 }
