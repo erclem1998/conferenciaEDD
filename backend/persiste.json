@@ -1,16 +1,1 @@
-{
-    "carnet": 202012345,
-    "hizq": {
-        "carnet": 201967890,
-        "hizq": null,
-        "hder": null,
-        "listaCursos": []
-    },
-    "hder": {
-        "carnet": 202116791,
-        "hizq": null,
-        "hder": null,
-        "listaCursos": []
-    },
-    "listaCursos": []
-}
+{"carnet":201616791,"nombres":"Juan Ramos","apellidos":"Galvez Juarez","cui":"1234567890123","correo":"jrgalgez@gmail.com","hizq":{"carnet":201112896,"nombres":"Carlo Manuel","apellidos":"Rosales Perez","cui":"1234567890123","correo":"cmrosales@gmail.com","hizq":{"carnet":20190006,"nombres":"Fernada Maria","apellidos":"Noriega Lax","cui":"1234567890123","correo":"fmnoriega@gmail.com","hizq":null,"hder":{"carnet":20190006,"nombres":"Fernada Maria","apellidos":"Noriega Lax","cui":"1234567890123","correo":"fmnoriega@gmail.com","hizq":null,"hder":null,"listaCursos":[]},"listaCursos":[]},"hder":{"carnet":201611206,"nombres":"Marco Antonio","apellidos":"Mux Lux","cui":"1234567890123","correo":"mamuxlux@gmail.com","hizq":null,"hder":null,"listaCursos":[]},"listaCursos":[]},"hder":{"carnet":201800606,"nombres":"Brenda Noemi","apellidos":"Veliz Lima","cui":"1234567890123","correo":"bnveliz@gmail.com","hizq":null,"hder":null,"listaCursos":[]},"listaCursos":[]}

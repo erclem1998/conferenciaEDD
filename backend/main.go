@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"strconv"
 	"os/exec"
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 )
 
@@ -19,11 +20,25 @@ type NodoLista struct{
 	Anio int `json:"anio"`
 }
 
+
+//STRUCT para registro de estudiantes
 type Nodo struct{
 	Carnet int `json:"carnet"`
+	Nombres string `json:"nombres"`
+	Apellidos string `json:"apellidos"`
+	CUI string `json:"cui"`
+	Correo string `json:"correo"`
 	Hizq* Nodo `json:"hizq"`
 	Hder* Nodo `json:"hder"`
 	ListaCursos[] NodoLista `json:"listaCursos"`
+}
+
+type Respuesta struct{
+	Message string `json:"message"`
+}
+
+type listaCarnet struct{
+	ListaCarnets[] int `json:"listacarnets"`
 }
 
 var raiz* Nodo
@@ -39,8 +54,16 @@ func getArbol(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(raiz)
 }
 
+//GET obtiene la lista de carnets en orden
+func getListaCarnetsInorden(w http.ResponseWriter, r *http.Request) {
+	var lista_carnets[] int
+	lista_carnets=inorden(raiz,lista_carnets)
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(&listaCarnet{ListaCarnets:lista_carnets})
+}
+
 func createNode(w http.ResponseWriter, r *http.Request) {
-	var newNode Nodo
+	var newNode* Nodo
 	//leemos el body de la petición
 	reqBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -50,52 +73,93 @@ func createNode(w http.ResponseWriter, r *http.Request) {
 	json.Unmarshal(reqBody, &newNode)
 	//fmt.Printf("%d",newNode.Carnet)
 	//insertamos la raiz
-	raiz=crearNodo(raiz,newNode.Carnet)
+	raiz=crearNodo(raiz,newNode)
+	escribir,err2:=json.Marshal(raiz)
+	if err2 != nil {
+        log.Fatal(err2)
+    }
+	data := []byte(escribir)
+    err = ioutil.WriteFile("persiste.json", data, 0644)
+    if err != nil {
+        log.Fatal(err)
+    }
 	fmt.Println("----------------")
 	//preorden(raiz)
 	//createDot(raiz)
 	//Si todo ha salido bien, devolvemos un status code 201 y el arbol
 	w.Header().Set("Content-Type", "application/json")
+	respuesta:= &Respuesta{Message:"Alumno creado exitosamente"}
 	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(raiz)
+	json.NewEncoder(w).Encode(respuesta)
 
 }
 
-func crearNodo(nodo* Nodo, valor int) *Nodo{
+func crearNodo(nodo* Nodo, nodoInsertar* Nodo) *Nodo{
 	//insertamos el primer nodo
 	if raiz==nil{
-		nuevoNodo:=&Nodo{Carnet:valor, Hizq:nil, Hder:nil, ListaCursos:[]NodoLista{}}
+		nuevoNodo:=&Nodo{
+			Carnet:nodoInsertar.Carnet, 
+			Nombres: nodoInsertar.Nombres,
+			Apellidos: nodoInsertar.Apellidos,
+			Correo: nodoInsertar.Correo,
+			CUI: nodoInsertar.CUI,
+			Hizq:nil, Hder:nil, ListaCursos:[]NodoLista{}}
 		raiz=nuevoNodo
 	} else{
 		//sino insertamos en donde corresponda
-		raiz=insertarNodo(raiz,valor)
+		raiz=insertarNodo(raiz,nodoInsertar)
 	}
 	return raiz
 }
 
-func insertarNodo(nodo* Nodo, valor int) *Nodo{
+func insertarNodo(nodo* Nodo, nodoInsertar *Nodo) *Nodo{
 	//Si es menor que el carnet actual
-	if valor < nodo.Carnet{
+	if nodoInsertar.Carnet < nodo.Carnet{
 		//si es null el hizq insertamos 
 		if nodo.Hizq==nil{
-			nuevoNodo:=&Nodo{Carnet:valor, Hizq:nil, Hder:nil, ListaCursos:[]NodoLista{}}
+			nuevoNodo:=&Nodo{
+				Carnet:nodoInsertar.Carnet, 
+				Nombres: nodoInsertar.Nombres,
+				Apellidos: nodoInsertar.Apellidos,
+				Correo: nodoInsertar.Correo,
+				CUI: nodoInsertar.CUI,
+				Hizq:nil, Hder:nil, ListaCursos:[]NodoLista{}}
 			nodo.Hizq=nuevoNodo
 		} else{
 			//sino seguimos recorriendo hasta insertar
-			nodo.Hizq=insertarNodo(nodo.Hizq, valor)
+			nodo.Hizq=insertarNodo(nodo.Hizq, nodoInsertar)
 		}
 	} else {
 		//Si es mayor que el carnet entra a este conjuntp de instrucciones
 		//Si el hder es null, insertamos
 		if nodo.Hder==nil{
-			nuevoNodo:=&Nodo{Carnet:valor, Hizq:nil, Hder:nil, ListaCursos:[]NodoLista{}}
+			nuevoNodo:=&Nodo{
+				Carnet:nodoInsertar.Carnet, 
+				Nombres: nodoInsertar.Nombres,
+				Apellidos: nodoInsertar.Apellidos,
+				Correo: nodoInsertar.Correo,
+				CUI: nodoInsertar.CUI,
+				Hizq:nil, Hder:nil, ListaCursos:[]NodoLista{}}
+			
 			nodo.Hder=nuevoNodo
 		} else{
 			//de lo contrario seguimos recorriendo hasta insertar
-			nodo.Hder=insertarNodo(nodo.Hder, valor)
+			nodo.Hder=insertarNodo(nodo.Hder, nodoInsertar)
 		}
 	}
 	return nodo 
+}
+
+//Recorrido en inorden
+func inorden(nodo* Nodo, lista[] int) []int {
+	if nodo.Hizq != nil{
+		lista=inorden(nodo.Hizq, lista)
+	}
+	lista = append(lista, nodo.Carnet)
+	if nodo.Hder != nil{
+		lista=inorden(nodo.Hder, lista)
+	}
+	return lista
 }
 
 //Recorrido en preorden
@@ -189,6 +253,7 @@ func main() {
 	router.HandleFunc("/arbol", getArbol).Methods("GET")
 	router.HandleFunc("/crearNodo", createNode).Methods("POST")
 	router.HandleFunc("/arbolBinario", getImagenArbol).Methods("GET")
-
-	log.Fatal(http.ListenAndServe(":3000", router))
+	router.HandleFunc("/listaEstudiantes", getListaCarnetsInorden).Methods("GET")
+	//Se agregaron cors
+	log.Fatal(http.ListenAndServe(":3000", handlers.CORS(handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"}), handlers.AllowedMethods([]string{"GET", "POST", "PUT", "HEAD", "OPTIONS"}), handlers.AllowedOrigins([]string{"*"}))(router)))
 }

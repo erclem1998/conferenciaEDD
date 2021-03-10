@@ -1,8 +1,14 @@
 digraph G{
 node[shape="box"]
-Nodo0[label="202016791"];
-Nodo1[label="201916791"];
+Nodo0[label="201616791"];
+Nodo1[label="201112896"];
 Nodo0->Nodo1;
-Nodo2[label="202116791"];
-Nodo0->Nodo2;
+Nodo2[label="20190006"];
+Nodo1->Nodo2;
+Nodo3[label="20190006"];
+Nodo2->Nodo3;
+Nodo4[label="201611206"];
+Nodo1->Nodo4;
+Nodo5[label="201800606"];
+Nodo0->Nodo5;
 }
