@@ -13,31 +13,31 @@
                         </div>
                         <form class="user">
                             <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user"
+                                <div class="col-sm-6 mb-3 mb-sm-0"><input [formControl]="nombres" class="form-control form-control-user"
                                         type="text" id="exampleFirstName" placeholder="Nombres" name="first_name">
                                 </div>
-                                <div class="col-sm-6"><input class="form-control form-control-user" type="text"
+                                <div class="col-sm-6"><input [formControl]="apellidos" class="form-control form-control-user" type="text"
                                         id="exampleFirstName" placeholder="Apellidos" name="Apellidos"></div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6">
-                                    <input class="form-control form-control-user" type="number" id="inputCui"
+                                    <input [formControl]="carnet" class="form-control form-control-user" type="number" id="inputCui"
                                         placeholder="Carnet" name="carnet">
                                 </div>
                                 <div class="col-sm-6">
-                                    <input class="form-control form-control-user" type="number" id="inputCui"
+                                    <input [formControl]="cui" class="form-control form-control-user" type="number" id="inputCui"
                                         placeholder="CUI" name="inputCui">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-12">
-                                    <input class="form-control form-control-user" type="email" id="exampleInputEmail"
+                                    <input [formControl]="correo" class="form-control form-control-user" type="email" id="exampleInputEmail"
                                         aria-describedby="emailHelp" placeholder="Correo Electrónico" name="email">
                                 </div>
                             </div>
                             <div class="row justify-content-center">
                                 <div class="col-sm-6">
-                                    <button class="btn btn-primary btn-block text-white btn-user" type="submit">Registrar
+                                    <button (click)="crearEstudiante()" class="btn btn-primary btn-block text-white btn-user" type="submit">Registrar
                                         Estudiante</button>
                                 </div>
                             </div>
