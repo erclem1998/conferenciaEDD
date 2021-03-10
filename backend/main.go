@@ -212,6 +212,7 @@ func preorden(nodo* Nodo) {
 	}
 }
 
+//GET genera el arbol a partir de la variable raíz y envía la imagen al frontend
 func getImagenArbol(w http.ResponseWriter, r *http.Request){
 	//Generamos el archivo dot
 	data := []byte(createDot(raiz))
@@ -245,7 +246,19 @@ func recorrerArbol(nombrePadre string, hijo* Nodo, textoActual string) string{
 		nombreHijo := "Nodo"
 		nombreHijo+=strconv.FormatInt(int64(contador), 10)
 		contador+=1
-		textoActual+=nombreHijo+"[label=\""+strconv.FormatInt(int64(hijo.Hizq.Carnet),10)+"\"];\n"
+		textoActual+=nombreHijo
+		textoActual+=`[shape=record label=<
+		`
+		textoActual+=`<table cellspacing="0" border="0" cellborder="1">
+		<tr>
+			<td colspan="2"><img src="avatar.png" /></td>
+		</tr>`
+		textoActual+="<tr><td colspan=\"2\">Nombre: "+ hijo.Hizq.Nombres+" "+hijo.Hizq.Apellidos+"</td></tr>"
+		textoActual+="<tr><td>Carnet: "+strconv.FormatInt(int64(hijo.Hizq.Carnet), 10)+"</td><td>CUI: "+hijo.Hizq.CUI+"</td></tr>"
+		textoActual+="<tr><td colspan=\"2\">Correo: "+hijo.Hizq.Correo+"</td></tr></table>"
+		textoActual+=`
+		>];
+		`
 		textoActual+=nombrePadre+"->"+nombreHijo+";\n"
 		textoActual=recorrerArbol(nombreHijo,hijo.Hizq, textoActual)
 	}
@@ -253,7 +266,19 @@ func recorrerArbol(nombrePadre string, hijo* Nodo, textoActual string) string{
 		nombreHijo := "Nodo"
 		nombreHijo+=strconv.FormatInt(int64(contador), 10)
 		contador+=1
-		textoActual+=nombreHijo+"[label=\""+strconv.FormatInt(int64(hijo.Hder.Carnet),10)+"\"];\n"
+		textoActual+=nombreHijo
+		textoActual+=`[shape=record label=<
+		`
+		textoActual+=`<table cellspacing="0" border="0" cellborder="1">
+		<tr>
+			<td colspan="2"><img src="avatar.png" /></td>
+		</tr>`
+		textoActual+="<tr><td colspan=\"2\">Nombre: "+ hijo.Hder.Nombres+" "+hijo.Hder.Apellidos+"</td></tr>"
+		textoActual+="<tr><td>Carnet: "+strconv.FormatInt(int64(hijo.Hder.Carnet), 10)+"</td><td>CUI: "+hijo.Hder.CUI+"</td></tr>"
+		textoActual+="<tr><td colspan=\"2\">Correo: "+hijo.Hder.Correo+"</td></tr></table>"
+		textoActual+=`
+		>];
+		`
 		textoActual+=nombrePadre+"->"+nombreHijo+";\n"
 		textoActual=recorrerArbol(nombreHijo,hijo.Hder, textoActual)
 	}
@@ -263,8 +288,20 @@ func recorrerArbol(nombrePadre string, hijo* Nodo, textoActual string) string{
 func createDot(nodo* Nodo) string{
 	var grafo string
 	grafo="digraph G{\n"
+	grafo+="graph [compound=true, labelloc=\"b\"];\n"
 	grafo+="node[shape=\"box\"]\n"
-	grafo+="Nodo0[label=\""+strconv.FormatInt(int64(nodo.Carnet), 10)+"\"];\n"
+	grafo+=`Nodo0[shape=record label=<
+	`
+	grafo+=`<table cellspacing="0" border="0" cellborder="1">
+	<tr>
+		<td colspan="2"><img src="avatar.png" /></td>
+	</tr>`
+	grafo+="<tr><td colspan=\"2\">Nombre: "+ nodo.Nombres+" "+nodo.Apellidos+"</td></tr>"
+	grafo+="<tr><td>Carnet: "+strconv.FormatInt(int64(nodo.Carnet), 10)+"</td><td>CUI: "+nodo.CUI+"</td></tr>"
+	grafo+="<tr><td colspan=\"2\">Correo: "+nodo.Correo+"</td></tr></table>"
+	grafo+=`
+	>];
+	`
 	contador=1
 	grafo=recorrerArbol("Nodo0", nodo, grafo)
 	grafo+="}"
