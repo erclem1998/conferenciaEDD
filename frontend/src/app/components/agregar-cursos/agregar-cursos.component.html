@@ -11,7 +11,7 @@
                         <div class="col-md-5">
                             <div class="dropdown"><button class="col-md-10 btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button">Estudiante&nbsp;</button>
                                 <div class="dropdown-menu" formControlName="correo" >
-                                    <a *ngFor="let lista of lista_estudiantes" class="dropdown-item" (click)="mensaje(lista)" >{{lista}}</a>
+                                    <a *ngFor="let lista of lista_estudiantes" class="dropdown-item" (click)="mostrarCursos(lista)" >{{lista}}</a>
                                 </div>
                             </div>
                         </div>
@@ -52,17 +52,11 @@
                                     </tr>
                                 </thead> 
                                 <tbody>
-                                    <tr>
+                                    <tr *ngFor="let listaE of lista_cursos">
                                         <th scope="row">1</th>
-                                        <td>Estructuras de Datos</td>
-                                        <td>75</td>
-                                        <td>2021</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Organizacion Computacional</td>
-                                        <td>70</td>
-                                        <td>2022</td>
+                                        <td>{{listaE.curso}}</td>
+                                        <td>{{listaE.nota}}</td>
+                                        <td>{{listaE.anio}}</td>
                                     </tr>
                                 </tbody>   
                             </table>
