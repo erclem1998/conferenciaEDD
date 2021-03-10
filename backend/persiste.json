@@ -1,1 +1,66 @@
-{"carnet":201616791,"nombres":"Juan Ramos","apellidos":"Galvez Juarez","cui":"1234567890123","correo":"jrgalgez@gmail.com","hizq":{"carnet":201112896,"nombres":"Carlo Manuel","apellidos":"Rosales Perez","cui":"1234567890123","correo":"cmrosales@gmail.com","hizq":{"carnet":20190006,"nombres":"Fernada Maria","apellidos":"Noriega Lax","cui":"1234567890123","correo":"fmnoriega@gmail.com","hizq":null,"hder":{"carnet":20190006,"nombres":"Fernada Maria","apellidos":"Noriega Lax","cui":"1234567890123","correo":"fmnoriega@gmail.com","hizq":null,"hder":null,"listaCursos":[]},"listaCursos":[]},"hder":{"carnet":201611206,"nombres":"Marco Antonio","apellidos":"Mux Lux","cui":"1234567890123","correo":"mamuxlux@gmail.com","hizq":null,"hder":null,"listaCursos":[]},"listaCursos":[]},"hder":{"carnet":201800606,"nombres":"Brenda Noemi","apellidos":"Veliz Lima","cui":"1234567890123","correo":"bnveliz@gmail.com","hizq":null,"hder":null,"listaCursos":[]},"listaCursos":[{"curso":"IPC1","nota":85, "anio":2017},{"curso":"MC1","nota":90, "anio":2017}]}
+{
+    "carnet": 201616791,
+    "nombres": "Juan Ramos",
+    "apellidos": "Galvez Juarez",
+    "cui": "1234567890123",
+    "correo": "jrgalgez@gmail.com",
+    "hizq": {
+        "carnet": 201112896,
+        "nombres": "Carlo Manuel",
+        "apellidos": "Rosales Perez",
+        "cui": "1234567890123",
+        "correo": "cmrosales@gmail.com",
+        "hizq": {
+            "carnet": 20190006,
+            "nombres": "Fernada Maria",
+            "apellidos": "Noriega Lax",
+            "cui": "1234567890123",
+            "correo": "fmnoriega@gmail.com",
+            "hizq": null,
+            "hder": null,
+            "listaCursos": []
+        },
+        "hder": {
+            "carnet": 201611206,
+            "nombres": "Marco Antonio",
+            "apellidos": "Mux Lux",
+            "cui": "1234567890123",
+            "correo": "mamuxlux@gmail.com",
+            "hizq": null,
+            "hder": {
+                "carnet": 201612097,
+                "nombres": "Erick Alexander",
+                "apellidos": "Lemus Morales",
+                "cui": "31867158105001",
+                "correo": "erick.lemus1998@gmail.com",
+                "hizq": null,
+                "hder": null,
+                "listaCursos": []
+            },
+            "listaCursos": []
+        },
+        "listaCursos": []
+    },
+    "hder": {
+        "carnet": 201800606,
+        "nombres": "Brenda Noemi",
+        "apellidos": "Veliz Lima",
+        "cui": "1234567890123",
+        "correo": "bnveliz@gmail.com",
+        "hizq": null,
+        "hder": null,
+        "listaCursos": []
+    },
+    "listaCursos": [
+        {
+            "curso": "IPC1",
+            "nota": 85,
+            "anio": 2017
+        },
+        {
+            "curso": "MC1",
+            "nota": 90,
+            "anio": 2017
+        }
+    ]
+}

@@ -282,7 +282,7 @@ func main() {
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/", indexRoute)
 	router.HandleFunc("/arbol", getArbol).Methods("GET")
-	router.HandleFunc("/crearNodo", createNode).Methods("POST")
+	router.HandleFunc("/crearEstudiante", createNode).Methods("POST")
 	router.HandleFunc("/arbolBinario", getImagenArbol).Methods("GET")
 	router.HandleFunc("/listaEstudiantes", getListaCarnetsInorden).Methods("GET")
 	router.HandleFunc("/cursosEstudiante", getListaCursos).Methods("POST")
