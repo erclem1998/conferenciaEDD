@@ -152,7 +152,7 @@ func insertarNodo(nodo* Nodo, nodoInsertar *Nodo) *Nodo{
 
 //POST obtiene los cursos de un estudiante
 func getListaCursos(w http.ResponseWriter, r *http.Request){
-	var cursos[] NodoLista
+	//var cursos[] NodoLista
 	var newNode* Nodo
 	//leemos el body de la petición
 	reqBody, err := ioutil.ReadAll(r.Body)
@@ -161,24 +161,32 @@ func getListaCursos(w http.ResponseWriter, r *http.Request){
 	}
 	//tomamos los valores del body y los colocamos en una variable de struct de Nodo
 	json.Unmarshal(reqBody, &newNode)
-	cursos = listaCursosEstudiante(raiz, newNode.Carnet)
+	buscado := listaCursosEstudiante(raiz, newNode.Carnet)
+	estudiante:=&Nodo{
+		Carnet:buscado.Carnet, 
+		Nombres: buscado.Nombres,
+		Apellidos: buscado.Apellidos,
+		Correo: buscado.Correo,
+		CUI: buscado.CUI,
+		Hizq:nil, Hder:nil, ListaCursos:buscado.ListaCursos,
+	}
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(&cursos)
+	json.NewEncoder(w).Encode(&estudiante)
 }
 
-func listaCursosEstudiante(nodo* Nodo, carnet int) []NodoLista{
-	var lista[] NodoLista
+func listaCursosEstudiante(nodo* Nodo, carnet int) *Nodo{
+	var estudiante* Nodo
 	if nodo.Carnet==carnet{
-		return nodo.ListaCursos
+		return nodo
 	}
 	if nodo.Hizq != nil{
-		lista=listaCursosEstudiante(nodo.Hizq, carnet)
+		estudiante=listaCursosEstudiante(nodo.Hizq, carnet)
 	}
 	if nodo.Hder != nil{
-		lista=listaCursosEstudiante(nodo.Hder, carnet)
+		estudiante=listaCursosEstudiante(nodo.Hder, carnet)
 	}
-	return lista
+	return estudiante
 }
 
 //Recorrido en inorden
