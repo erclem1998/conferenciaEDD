@@ -30,7 +30,7 @@ export class AgregarCursosComponent implements OnInit {
   }
 
   mostrarCursos(carnet: number){
-    this.estudiateService.getListaCursos(carnet).subscribe((dataList:Estudiante)=>{
+    this.estudiateService.getInfoEstudiante(carnet).subscribe((dataList:Estudiante)=>{
       this.estudiante=dataList
       console.log(this.estudiante)
     },(err)=>{

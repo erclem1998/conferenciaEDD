@@ -22,7 +22,7 @@ export class EstudiantesService {
     return this.http.get<any>(baseURL + 'listaEstudiantes', httpOptions);
   }
 
-  getListaCursos(carnet):Observable<Estudiante>{
+  getInfoEstudiante(carnet):Observable<Estudiante>{
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
