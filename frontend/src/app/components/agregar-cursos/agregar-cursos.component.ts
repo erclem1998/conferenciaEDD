@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EstudiantesService } from "../../services/estudiantes/estudiantes.service";
 
 @Component({
   selector: 'app-agregar-cursos',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AgregarCursosComponent implements OnInit {
 
-  constructor() { }
+  lista_estudiantes: number[]=[]
+
+  constructor(private estudiateService:EstudiantesService) {
+    this.estudiateService.getListaCarnets().subscribe((dataList:any)=>{
+      this.lista_estudiantes=dataList.listacarnets
+      console.log(dataList)
+    })
+  }
 
   ngOnInit(): void {
+  }
+
+  mensaje(carnet){
+    console.log("carnet "+carnet)
   }
 
 }

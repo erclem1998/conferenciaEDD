@@ -10,8 +10,8 @@
                     <div class="buttons">
                         <div class="col-md-5">
                             <div class="dropdown"><button class="col-md-10 btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button">Estudiante&nbsp;</button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">First Itemmmmmmmmmmmmmm</a><a class="dropdown-item" href="#">Second Itemmmmmmmmmmmmmmmm</a><a class="dropdown-item" href="#">Third Itemmmmmmmmmmmmm</a>
+                                <div class="dropdown-menu" formControlName="correo" >
+                                    <a *ngFor="let lista of lista_estudiantes" class="dropdown-item" (click)="mensaje(lista)" >{{lista}}</a>
                                 </div>
                             </div>
                         </div>
