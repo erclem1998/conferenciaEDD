@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { baseURL } from "../../apiURL/baseURL";
 import { Observable } from "rxjs";
 import { Curso } from "../../models/curso/curso";
+import { Estudiante } from "../../models/estudiante/estudiante";
 
 @Injectable({
   providedIn: 'root'
@@ -21,13 +22,13 @@ export class EstudiantesService {
     return this.http.get<any>(baseURL + 'listaEstudiantes', httpOptions);
   }
 
-  getListaCursos(carnet):Observable<Curso[]>{
+  getListaCursos(carnet):Observable<Estudiante>{
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
     };
-    return this.http.post<Curso[]>(baseURL + 'cursosEstudiante', {carnet: carnet}, httpOptions);
+    return this.http.post<Estudiante>(baseURL + 'cursosEstudiante', {carnet: carnet}, httpOptions);
   }
 
   postEstudiante(estudiante):Observable<any>{

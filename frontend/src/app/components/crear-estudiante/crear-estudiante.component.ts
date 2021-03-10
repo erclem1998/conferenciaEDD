@@ -29,7 +29,8 @@ export class CrearEstudianteComponent implements OnInit {
       nombres:this.nombres.value,
       apellidos:this.apellidos.value,
       cui:String(this.cui.value),
-      correo:this.correo.value
+      correo:this.correo.value,
+      listaCursos:[]
     }
     console.log(this.cui.value)
     this.estudianteService.postEstudiante(estudiante).subscribe((res:any)=>{

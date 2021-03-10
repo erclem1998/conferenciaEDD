@@ -1,3 +1,23 @@
+<!--<div *ngIf="mostrarMensaje" class="row justify-content-around">
+    <div class="col-md-5">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Etudiante creado correctamente
+            <button type="button" (click)="desactivarMensaje()" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+</div>-->
+<div *ngIf="mostrarMensajeError" class="row justify-content-around">
+    <div class="col-md-5">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{mensajeError}}
+            <button type="button" (click)="desactivarMensaje()" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+</div>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -10,7 +30,7 @@
                     <div class="buttons">
                         <div class="col-md-5">
                             <div class="dropdown"><button class="col-md-10 btn btn-primary dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button">Estudiante&nbsp;</button>
-                                <div class="dropdown-menu" formControlName="correo" >
+                                <div class="dropdown-menu" >
                                     <a *ngFor="let lista of lista_estudiantes" class="dropdown-item" (click)="mostrarCursos(lista)" >{{lista}}</a>
                                 </div>
                             </div>
@@ -51,9 +71,9 @@
                                         <th scope="col">Año</th>
                                     </tr>
                                 </thead> 
-                                <tbody>
-                                    <tr *ngFor="let listaE of lista_cursos">
-                                        <th scope="row">1</th>
+                                <tbody *ngIf="estudiante" >
+                                    <tr *ngFor="let listaE of estudiante.listaCursos;let indice=index">
+                                        <th scope="row">{{indice+1}}</th>
                                         <td>{{listaE.curso}}</td>
                                         <td>{{listaE.nota}}</td>
                                         <td>{{listaE.anio}}</td>
