@@ -15,6 +15,8 @@ export class CrearEstudianteComponent implements OnInit {
   apellidos= new FormControl('')
   cui= new FormControl('')
   correo= new FormControl('')
+  mostrarMensaje=false
+  mostrarMensajeError=false
 
   constructor(private estudianteService: EstudiantesService) { }
 
@@ -31,9 +33,22 @@ export class CrearEstudianteComponent implements OnInit {
     }
     console.log(this.cui.value)
     this.estudianteService.postEstudiante(estudiante).subscribe((res:any)=>{
+      this.mostrarMensaje=true
+      this.carnet.setValue(0)
+      this.nombres.setValue("")
+      this.apellidos.setValue("")
+      this.cui.setValue("")
+      this.correo.setValue("")
       console.log("Estudiante Creado")
+    },(err)=>{
+      this.mostrarMensajeError=true
     })
 
+  }
+
+  desactivarMensaje(){
+    this.mostrarMensaje=false
+    this.mostrarMensajeError=false
   }
 
   vamosaver(){
