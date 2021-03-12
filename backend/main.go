@@ -177,9 +177,9 @@ func insertarCurso(w http.ResponseWriter, r *http.Request){
         log.Fatal(err)
     }
 	w.Header().Set("Content-Type", "application/json")
-	//respuesta:= &Respuesta{Message:"Curso Creado"}
+	respuesta:= &Respuesta{Message:"Curso Creado"}
 	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(&raiz)
+	json.NewEncoder(w).Encode(respuesta)
 }
 
 //POST obtiene los cursos de un estudiante
