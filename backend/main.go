@@ -41,6 +41,11 @@ type listaCarnet struct{
 	ListaCarnets[] int `json:"listacarnets"`
 }
 
+type asignacion struct{
+	Carnet int `json:"carnet"`
+	Course NodoLista `json:"curso"`
+}
+
 var raiz* Nodo
 var contador int
 
@@ -148,6 +153,33 @@ func insertarNodo(nodo* Nodo, nodoInsertar *Nodo) *Nodo{
 		}
 	}
 	return nodo 
+}
+
+func insertarCurso(w http.ResponseWriter, r *http.Request){
+	//var cursos[] NodoLista
+	var asign* asignacion
+	//leemos el body de la petición
+	reqBody, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		fmt.Fprintf(w, "Datos Inválidos")
+	}
+	//tomamos los valores del body y los colocamos en una variable de struct de Nodo
+	json.Unmarshal(reqBody, &asign)
+	buscado := listaCursosEstudiante(raiz, asign.Carnet)
+	buscado.ListaCursos = append(buscado.ListaCursos, asign.Course)
+	escribir,err2:=json.Marshal(raiz)
+	if err2 != nil {
+        log.Fatal(err2)
+    }
+	data := []byte(escribir)
+    err = ioutil.WriteFile("persiste.json", data, 0644)
+    if err != nil {
+        log.Fatal(err)
+    }
+	w.Header().Set("Content-Type", "application/json")
+	//respuesta:= &Respuesta{Message:"Curso Creado"}
+	w.WriteHeader(http.StatusCreated)
+	json.NewEncoder(w).Encode(&raiz)
 }
 
 //POST obtiene los cursos de un estudiante
@@ -335,6 +367,7 @@ func main() {
 	router.HandleFunc("/arbolBinario", getImagenArbol).Methods("GET")
 	router.HandleFunc("/listaEstudiantes", getListaCarnetsInorden).Methods("GET")
 	router.HandleFunc("/cursosEstudiante", getListaCursos).Methods("POST")
+	router.HandleFunc("/insertarCurso", insertarCurso).Methods("POST")
 	//Se agregaron cors
 	log.Fatal(http.ListenAndServe(":3000", handlers.CORS(handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"}), handlers.AllowedMethods([]string{"GET", "POST", "PUT", "HEAD", "OPTIONS"}), handlers.AllowedOrigins([]string{"*"}))(router)))
 }

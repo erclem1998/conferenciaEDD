@@ -41,4 +41,11 @@ Nodo5[shape=none label=<
 		</tr><tr><td colspan="2">Nombre: Brenda Noemi Veliz Lima</td></tr><tr><td>Carnet: 201800606</td><td>CUI: 1234567890123</td></tr><tr><td colspan="2">Correo: bnveliz@gmail.com</td></tr></table>
 		>];
 		Nodo0->Nodo5;
+Nodo6[shape=none label=<
+		<table cellspacing="0" border="0" cellborder="1">
+		<tr>
+			<td colspan="2"><img src="avatar.png" /></td>
+		</tr><tr><td colspan="2">Nombre: Juan Carlos Plata</td></tr><tr><td>Carnet: 201984566</td><td>CUI: 1234567890123</td></tr><tr><td colspan="2">Correo: juancaplata@gmail.com</td></tr></table>
+		>];
+		Nodo5->Nodo6;
 }
