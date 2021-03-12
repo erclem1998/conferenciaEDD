@@ -176,10 +176,18 @@ func insertarCurso(w http.ResponseWriter, r *http.Request){
     if err != nil {
         log.Fatal(err)
     }
+	estudiante:=&Nodo{
+		Carnet:buscado.Carnet, 
+		Nombres: buscado.Nombres,
+		Apellidos: buscado.Apellidos,
+		Correo: buscado.Correo,
+		CUI: buscado.CUI,
+		Hizq:nil, Hder:nil, ListaCursos:buscado.ListaCursos,
+	}
 	w.Header().Set("Content-Type", "application/json")
-	respuesta:= &Respuesta{Message:"Curso Creado"}
+	//respuesta:= &Respuesta{Message:"Curso Creado"}
 	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(respuesta)
+	json.NewEncoder(w).Encode(estudiante)
 }
 
 //POST obtiene los cursos de un estudiante
