@@ -170,23 +170,28 @@ func getListaCursos(w http.ResponseWriter, r *http.Request){
 		CUI: buscado.CUI,
 		Hizq:nil, Hder:nil, ListaCursos:buscado.ListaCursos,
 	}
+	//fmt.Println(estudiante)
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(&estudiante)
+	json.NewEncoder(w).Encode(estudiante)
 }
 
 func listaCursosEstudiante(nodo* Nodo, carnet int) *Nodo{
-	var estudiante* Nodo
-	if nodo.Carnet==carnet{
-		return nodo
+	var es* Nodo
+	if nodo!=nil{
+		if nodo.Carnet==carnet{
+			es=nodo
+			fmt.Println("ENCONTRADOOOOOOOOO")
+			return es
+		}else{
+			if nodo.Carnet>carnet{
+				es=listaCursosEstudiante(nodo.Hizq,carnet)
+			}else{
+				es=listaCursosEstudiante(nodo.Hder,carnet)
+			}
+		}
 	}
-	if nodo.Hizq != nil{
-		estudiante=listaCursosEstudiante(nodo.Hizq, carnet)
-	}
-	if nodo.Hder != nil{
-		estudiante=listaCursosEstudiante(nodo.Hder, carnet)
-	}
-	return estudiante
+	return es
 }
 
 //Recorrido en inorden
@@ -230,13 +235,13 @@ func getImagenArbol(w http.ResponseWriter, r *http.Request){
 		fmt.Println("Todo bien")
 	}
 	//abrimos la imagen
-	img, err3 := os.Open("./grafo.jpg")
+	img, err3 := os.Open("./grafo.png")
     if err3 != nil {
         log.Fatal(err3) // perhaps handle this nicer
     }
     defer img.Close()
 	//devolvemos como respuesta la imagen
-    w.Header().Set("Content-Type", "image/jpeg")
+    w.Header().Set("Content-Type", "image/png")
     io.Copy(w, img)
 
 }
@@ -247,7 +252,7 @@ func recorrerArbol(nombrePadre string, hijo* Nodo, textoActual string) string{
 		nombreHijo+=strconv.FormatInt(int64(contador), 10)
 		contador+=1
 		textoActual+=nombreHijo
-		textoActual+=`[shape=record label=<
+		textoActual+=`[shape=none label=<
 		`
 		textoActual+=`<table cellspacing="0" border="0" cellborder="1">
 		<tr>
@@ -267,7 +272,7 @@ func recorrerArbol(nombrePadre string, hijo* Nodo, textoActual string) string{
 		nombreHijo+=strconv.FormatInt(int64(contador), 10)
 		contador+=1
 		textoActual+=nombreHijo
-		textoActual+=`[shape=record label=<
+		textoActual+=`[shape=none label=<
 		`
 		textoActual+=`<table cellspacing="0" border="0" cellborder="1">
 		<tr>
@@ -289,8 +294,7 @@ func createDot(nodo* Nodo) string{
 	var grafo string
 	grafo="digraph G{\n"
 	grafo+="graph [compound=true, labelloc=\"b\"];\n"
-	grafo+="node[shape=\"box\"]\n"
-	grafo+=`Nodo0[shape=record label=<
+	grafo+=`Nodo0[shape=none label=<
 	`
 	grafo+=`<table cellspacing="0" border="0" cellborder="1">
 	<tr>
