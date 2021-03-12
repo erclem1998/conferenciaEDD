@@ -1,13 +1,13 @@
-<!--<div *ngIf="mostrarMensaje" class="row justify-content-around">
+<div *ngIf="mostrarMensaje" class="row justify-content-around">
     <div class="col-md-5">
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            Etudiante creado correctamente
+            Curso creado correctamente
             <button type="button" (click)="desactivarMensaje()" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
     </div>
-</div>-->
+</div>-
 <div *ngIf="mostrarMensajeError" class="row justify-content-around">
     <div class="col-md-5">
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -44,7 +44,7 @@
 </div>
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="rounded shadow-lg border-0 my-5" role="tablist" id="accordion-1">
                 <div class="card">
                     <div class="card-header" role="tab">
@@ -52,7 +52,72 @@
                     </div>
                     <div class="collapse show item-1" role="tabpanel" data-parent="#accordion-1">
                         <div class="card-body">
-                            
+                            <div class="row justify-content-around">
+                                <div class="col-md-8">
+                                    <div class="card shadow mb-3">
+                                        <div class="card-header py-3">
+                                            <p class="text-primary m-0 font-weight-bold">Datos del Estudiante</p>
+                                        </div>
+                                        <div class="card-body">
+                                            <form>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <div class="form-group"><label for="first_name"><strong>Nombres</strong></label><input class="form-control" [formControl]="nombres" type="text" name="nombres" readonly=""></div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group"><label for="last_name"><strong>Apellidos</strong></label><input class="form-control" [formControl]="apellidos" type="text" name="apellidos" readonly=""></div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <div class="form-group"><label for="first_name"><strong>Carnet</strong></label><input class="form-control" [formControl]="carnet" type="text" name="carnet" readonly=""></div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group"><label for="last_name"><strong>CUI</strong></label><input class="form-control" [formControl]="cui" type="text" name="cui" readonly=""></div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <div class="form-group"><label for="email"><strong>Correo</strong></label><input class="form-control" [formControl]="correo" type="correo" name="correo" readonly=""></div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card shadow mb-3">
+                                        <div class="card-header py-3">
+                                            <p class="text-primary m-0 font-weight-bold">Curso a Registrar</p>
+                                        </div>
+                                        <div class="card-body">
+                                            <form>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <div class="form-group"><label for="email"><strong>Curso</strong></label>
+                                                            <select class="form-control form-select" [(ngModel)]="opcion" name="opcion">
+                                                                <option *ngFor="let valor of cursosMostrar" [value]="valor">{{valor}}</option>
+                                                              </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <div class="form-group"><label for="first_name"><strong>Año</strong></label><input class="form-control" [formControl]="anio" type="number" placeholder="0" name="anio"></div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group"><label for="last_name"><strong>Nota</strong></label><input class="form-control" [formControl]="nota" type="number" placeholder="0" name="nota"></div>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="row justify-content-around">
+                                                        <div class="form-group"><button class="btn btn-primary btn-sm" type="submit" (click)="guardarCurso()">Guardar</button></div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

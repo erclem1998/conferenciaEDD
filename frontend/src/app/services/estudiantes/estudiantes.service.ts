@@ -40,4 +40,13 @@ export class EstudiantesService {
     return this.http.post<Curso[]>(baseURL + 'crearEstudiante', estudiante, httpOptions);
   }
 
+  postCursoAprobado(data):Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    };
+    return this.http.post<any>(baseURL + 'insertarCurso', data, httpOptions);
+  }
+
 }

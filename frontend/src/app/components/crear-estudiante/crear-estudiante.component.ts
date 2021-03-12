@@ -35,7 +35,7 @@ export class CrearEstudianteComponent implements OnInit {
     console.log(this.cui.value)
     this.estudianteService.postEstudiante(estudiante).subscribe((res:any)=>{
       this.mostrarMensaje=true
-      this.carnet.setValue(0)
+      this.carnet.setValue("")
       this.nombres.setValue("")
       this.apellidos.setValue("")
       this.cui.setValue("")
