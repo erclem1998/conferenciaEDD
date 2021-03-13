@@ -20,7 +20,6 @@ estudiantes y los cursos que ha aprobado.
 Cabe destacar que el servidor web hace uso de los siguientes paquetes:
 
 ### **1. github.com/gorilla/mux**
-
 Utilizado para generar el enrutador de solicitudes HTTP.
 Se debe instalar de la siguiente manera.
 
@@ -32,11 +31,20 @@ el acceso a las aplicaciones web a los recursos del mismo.
 
 **go get github.com/gorilla/handlers**
 
-### Rutas o endpoints
+## Rutas o endpoints del Servidor
 
 ## Acerca de la Aplicación Web con Angular
 La aplicación contenida dentro de este proyecto contiene las siguientes caracteristicas:
 
-**1. Página de Inicio**
-
+### **1. Página de Inicio**
+Es un componente que muestra una vista de bienvenida dentro de la aplicación
 ![Alt text](img/inicio.png?raw=true "Inicio")
+
+### **2. Crear Estudiante**
+Es un componente que permite registrar un estudiante.
+![Alt text](img/crearEstudiante.png?raw=true "Inicio")
+
+### **3. Registro de Cursos Aprobados**
+Es un componente que permite registar cursos aprobados a un estudiante con nota y año de aprobación.
+Además permite visualizar los cursos que actualmente posee aprobados el estudiante.
+![Alt text](img/agregarCurso.png?raw=true "Inicio")
