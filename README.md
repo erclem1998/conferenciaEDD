@@ -60,3 +60,24 @@ Es un componente que permite registrar un estudiante.
 Es un componente que permite registar cursos aprobados a un estudiante con nota y año de aprobación.
 Además permite visualizar los cursos que actualmente posee aprobados el estudiante.
 ![Alt text](img/agregarCurso.png?raw=true "Inicio")
+
+## Ejecución del Proyecto
+
+### **1. Servidor Web**
+Para ejecutar el servidor web debes seguir los siguientes pasos:
+
+- cd backend
+- go run main.go 
+
+### **Nota:** si estas utilizando una distribución Linux debes crear un archivo llamado crearGrafo.sh para generar el arbol de estudiantes ya que el crearGrafo.bat es válido unicamente en Windows. 
+
+
+### **2. Aplicación Web con Angular**
+Para ejecutar el la aplicación debes seguir los siguientes pasos:
+
+- cd frontend
+- ng serve
+
+## Contacto
+Si en dado caso tienes alguna duda en la ejecución del proyecto, puedes escribirme a mi correo personal:
+erick.lemus1998@gmail.com

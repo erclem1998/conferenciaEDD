@@ -14,6 +14,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
+//STRUCT para manejar los cursos aprobados
 type NodoLista struct{
 	Curso string `json:"curso"`
 	Nota int `json:"nota"`
@@ -67,6 +68,7 @@ func getListaCarnetsInorden(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(&listaCarnet{ListaCarnets:lista_carnets})
 }
 
+//POST registra un nuevo estudiante
 func createNode(w http.ResponseWriter, r *http.Request) {
 	var newNode* Nodo
 	//leemos el body de la petición
@@ -117,6 +119,7 @@ func crearNodo(nodo* Nodo, nodoInsertar* Nodo) *Nodo{
 	return raiz
 }
 
+// función que recorre el arbol para poder insertar el nodo
 func insertarNodo(nodo* Nodo, nodoInsertar *Nodo) *Nodo{
 	//Si es menor que el carnet actual
 	if nodoInsertar.Carnet < nodo.Carnet{
@@ -155,6 +158,7 @@ func insertarNodo(nodo* Nodo, nodoInsertar *Nodo) *Nodo{
 	return nodo 
 }
 
+//POST registra un nuevo curso aprobado
 func insertarCurso(w http.ResponseWriter, r *http.Request){
 	//var cursos[] NodoLista
 	var asign* asignacion
@@ -353,6 +357,7 @@ func createDot(nodo* Nodo) string{
 	//fmt.Println(grafo)
 }
 
+//Carga los datos del arbol que se encuentran almacenados en un archivo json
 func cargarDatos() *Nodo{
 	var arbol *Nodo
 	datosArchivo, err := ioutil.ReadFile("./persiste.json")
