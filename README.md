@@ -9,9 +9,21 @@ Angular, que hoy en día es uno de los mas utilizados en el desarrollo de Aplica
 2. Aplicación Web desarrollada con Angular.
 
 ## Lo que tienes que saber antes de hacer uso de este ejemplo
-* Se instaló la ultima versión estable de Angular (v11.2.2)
 * Node v14.15.4
+* Angular v11.2.2
+* Go v1.16
 
 ## Acerca del Servidor Web
-Este ejemplo se basa en el uso de un arbol binario de busqueda, donde se almacenan los datos de
+Este ejemplo se basa en el uso de un arbol binario de búsqueda, donde se almacenan los datos de
 estudiantes y los cursos que ha aprobado.
+
+Cabe destacar que el servidor web hace uso de los siguientes paquetes:
+**1. github.com/gorilla/mux**
+Utilizado para generar el enrutador de solicitudes HTTP.
+Se debe instalar de la siguiente manera.
+**go get github.com/gorilla/mux**
+
+**2. github.com/gorilla/handlers**
+Utilizado para manejar los CORS del servidor, permitiendo de esta manera
+el acceso a las aplicaciones web.
+**go get github.com/gorilla/handlers**
