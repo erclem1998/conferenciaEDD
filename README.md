@@ -29,6 +29,14 @@ Se debe instalar de la siguiente manera.
 **2. github.com/gorilla/handlers**
 
 Utilizado para manejar los CORS del servidor, permitiendo de esta manera
-el acceso a las aplicaciones web.
+el acceso a las aplicaciones web a los recursos del mismo.
 
 **go get github.com/gorilla/handlers**
+
+### Rutas o endpoints
+
+## Acerca de la Aplicación Web con Angular
+La aplicación contenida dentro de este proyecto contiene las siguientes caracteristicas:
+
+**1. Página de Inicio**
+![Alt text](img/inicio.png?raw=true "Title")
