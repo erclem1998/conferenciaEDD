@@ -9,9 +9,12 @@ Angular, que hoy en día es uno de los mas utilizados en el desarrollo de Aplica
 2. Aplicación Web desarrollada con Angular.
 
 ## Lo que tienes que saber antes de hacer uso de este ejemplo
-* Node v14.15.4
-* Angular v11.2.2
-* Go v1.16
+
+| Herramienta | Versión  |
+| :----------:| :------: |
+| Node.js     | 14.15.4  |
+| Angular     | 11.2.2   |  
+| Go          | 1.16     |
 
 ## Acerca del Servidor Web
 Este ejemplo se basa en el uso de un arbol binario de búsqueda, donde se almacenan los datos de
@@ -32,6 +35,15 @@ el acceso a las aplicaciones web a los recursos del mismo.
 **go get github.com/gorilla/handlers**
 
 ## Rutas o endpoints del Servidor
+
+| Ruta              | Función                                                                         | Tipo    |
+| :--------------:  |:------------------------------------------------------------------------------: | :-----: |
+| /arbol            | Devuelve el arbol de estudiantes en formato JSON                                |   GET   | 
+| /crearEstudiante  | Crea un nuevo estudiante                                                        |  POST   |
+| /arbolBinario     | Devuelve el arbol de estudiantes como una imagen en formato png                 |   GET   |
+| /listaEstudiantes | Devuelve un JSON con una lista de carnets                                       |   GET   |
+| /cursosEstudiante | Devuelve la información completa del estudiantes, con lista de cursos aprobados |  POST   |
+| /insertarCurso    | Registra un nuevo curso aprobado por el estudiante                              |  POST   |
 
 ## Acerca de la Aplicación Web con Angular
 La aplicación contenida dentro de este proyecto contiene las siguientes caracteristicas:
