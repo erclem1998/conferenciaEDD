@@ -19,15 +19,14 @@ estudiantes y los cursos que ha aprobado.
 
 Cabe destacar que el servidor web hace uso de los siguientes paquetes:
 
-**1. github.com/gorilla/mux**
+### **1. github.com/gorilla/mux**
 
 Utilizado para generar el enrutador de solicitudes HTTP.
 Se debe instalar de la siguiente manera.
 
 **go get github.com/gorilla/mux**
 
-**2. github.com/gorilla/handlers**
-
+### **2. github.com/gorilla/handlers**
 Utilizado para manejar los CORS del servidor, permitiendo de esta manera
 el acceso a las aplicaciones web a los recursos del mismo.
 
@@ -39,4 +38,5 @@ el acceso a las aplicaciones web a los recursos del mismo.
 La aplicación contenida dentro de este proyecto contiene las siguientes caracteristicas:
 
 **1. Página de Inicio**
-![Alt text](img/inicio.png?raw=true "Title")
+
+![Alt text](img/inicio.png?raw=true "Inicio")
