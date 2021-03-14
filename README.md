@@ -76,6 +76,7 @@ Para ejecutar el servidor web debes seguir los siguientes pasos:
 Para ejecutar el la aplicación debes seguir los siguientes pasos:
 
 - cd frontend
+- npm install
 - ng serve
 
 ## Contacto
